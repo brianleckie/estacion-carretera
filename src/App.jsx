@@ -625,56 +625,61 @@ export default function App() {
       </section>
 
       {/* CONTACTO */}
-      <section className="contacto-section" id="contacto">
-{/* MAPA — iframe de Google Maps, pesa 0 en el bundle */}
-<div style={{
-  marginTop: "40px",
-  borderRadius: "16px",
-  overflow: "hidden",
-  height: "320px",
-  border: "1px solid rgba(255,255,255,0.1)"
-}}>
-  <iframe
-    title="Ubicación Estación de Carretera"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.8!2d-55.6303897!3d-27.0724942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457fbdc24ac0085%3A0xbba96236764a0e81!2sEstaci%C3%B3n%20de%20Carretera%20-%20Hohenau%20-%20Michi%20no%20Eki!5e0!3m2!1ses!2spy!4v1700000000000"
-    width="100%"
-    height="100%"
-    style={{ border: 0 }}
-    allowFullScreen=""
-    loading="lazy"
-    referrerPolicy="no-referrer-when-downgrade"
-  />
-</div>
-        <div className="contacto-grid">
-          <div className="contacto-card">
-            <span className="contacto-icon">📞</span>
-            <span className="contacto-label">Teléfono / WhatsApp</span>
-            <span className="contacto-val">{TEL_ESTACION}</span>
-            <a className="contacto-btn"
-              href={`https://wa.me/595${TEL_ESTACION.replace(/^0/,"")}?text=Hola%20Estaci%C3%B3n%20de%20Carretera!`}
-              target="_blank" rel="noreferrer">
-              Escribir por WhatsApp
-            </a>
-          </div>
-          <div className="contacto-card">
-            <span className="contacto-icon">📍</span>
-            <span className="contacto-label">Ubicación</span>
-            <span className="contacto-val">Ruta PY 06 · Hohenau</span>
-            <a className="contacto-btn" href={MAPS_URL} target="_blank" rel="noreferrer">
-              Ver en Google Maps
-            </a>
-          </div>
-          <div className="contacto-card">
-            <span className="contacto-icon">🏛️</span>
-            <span className="contacto-label">Municipalidad</span>
-            <span className="contacto-val">Hohenau Oficial</span>
-            <a className="contacto-btn" href="https://hohenau.gov.py/" target="_blank" rel="noreferrer">
-              Ver sitio oficial
-            </a>
-          </div>
-        </div>
-      </section>
+<section className="contacto-section" id="contacto">
+  <div className="section-header">
+    <p className="section-eyebrow">Visitanos</p>
+    <h2 className="section-title">¿Cómo llegar?</h2>
+    <p className="section-sub">Sobre la Ruta PY 06, Hohenau, Itapúa · Abiertos los 7 días del año</p>
+  </div>
+  <div className="contacto-grid">
+    <div className="contacto-card">
+      <span className="contacto-icon">📞</span>
+      <span className="contacto-label">Teléfono / WhatsApp</span>
+      <span className="contacto-val">{TEL_ESTACION}</span>
+      <a className="contacto-btn"
+        href={`https://wa.me/595${TEL_ESTACION.replace(/^0/,"")}?text=Hola%20Estaci%C3%B3n%20de%20Carretera!`}
+        target="_blank" rel="noreferrer">
+        Escribir por WhatsApp
+      </a>
+    </div>
+    <div className="contacto-card">
+      <span className="contacto-icon">📍</span>
+      <span className="contacto-label">Ubicación</span>
+      <span className="contacto-val">Ruta PY 06 · Hohenau</span>
+      <a className="contacto-btn" href={MAPS_URL} target="_blank" rel="noreferrer">
+        Ver en Google Maps
+      </a>
+    </div>
+    <div className="contacto-card">
+      <span className="contacto-icon">🏛️</span>
+      <span className="contacto-label">Municipalidad</span>
+      <span className="contacto-val">Hohenau Oficial</span>
+      <a className="contacto-btn" href="https://hohenau.gov.py/" target="_blank" rel="noreferrer">
+        Ver sitio oficial
+      </a>
+    </div>
+  </div>
 
+  {/* MAPA — va ABAJO de las tarjetas, no arriba */}
+  <div style={{
+    marginTop: "32px",
+    borderRadius: "16px",
+    overflow: "hidden",
+    height: "320px",
+    border: "1px solid rgba(255,255,255,0.1)"
+  }}>
+    <iframe
+      title="Ubicación Estación de Carretera"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.8!2d-55.6303897!3d-27.0724942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457fbdc24ac0085%3A0xbba96236764a0e81!2sEstaci%C3%B3n%20de%20Carretera%20-%20Hohenau%20-%20Michi%20no%20Eki!5e0!3m2!1ses!2spy!4v1700000000000"
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen=""
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+  </div>
+</section>
       {/* FOOTER */}
       <footer className="footer">
         <div style={{display:"flex",alignItems:"center",gap:"10px"}}>
