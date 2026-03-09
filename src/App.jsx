@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const WHATSAPP_BASE = "https://wa.me/595";
 const TEL_ESTACION = "0994855562";
@@ -31,16 +31,16 @@ const CATEGORIES = [
 ];
 
 const PRODUCTS = [
-  { id: 1,  name: "Jabón Artesanal Natural",     price: 28000,  category: "Cosmética",   vendedora: "Almaluna",         badge: "Destacado", image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=600&h=600&fit=crop",    desc: "Jabones artesanales con ingredientes naturales de la región, sin sulfatos ni parabenos. Cada pieza hecha a mano por Marlene Kleiner." },
-  { id: 2,  name: "Remera Estampada Guaraní",    price: 85000,  category: "Ropa",        vendedora: "Gloria Estampados", badge: "Nuevo",      image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=600&fit=crop",    desc: "Remeras de algodón con diseños originales inspirados en la cultura guaraní. Estampado artesanal hecho a mano por Gloria." },
-  { id: 3,  name: "Pintura Paisaje Paraguayo",   price: 320000, category: "Arte",        vendedora: "Arte Paraguayo",    badge: null,         image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&h=600&fit=crop",    desc: "Pinturas al óleo sobre tela, representando paisajes del departamento de Itapúa. Piezas únicas firmadas por la artista." },
-  { id: 4,  name: "Miel de Abeja Pura",          price: 45000,  category: "Alimentos",   vendedora: "Campo Verde",       badge: null,         image: "https://publish.purewow.net/wp-content/uploads/sites/2/2022/11/Egg-wash-substitute-Honey-or-Maple-Syrup.jpg?fit=750%2C441", desc: "Miel pura de colmenas propias, sin aditivos ni conservantes. Cosechada en los campos de Hohenau." },
-  { id: 5,  name: "Queso Paraguay Fresco",       price: 38000,  category: "Alimentos",   vendedora: "Lácteos Hohenau",   badge: null,         image: "https://images.unsplash.com/photo-1552767059-ce182ead6c1b?w=600&h=600&fit=crop",    desc: "Queso fresco elaborado con leche de vaca de pastoreo libre. Receta tradicional de la colonia alemana de Hohenau." },
-  { id: 6,  name: "Hamaca Paraguaya Tejida",     price: 180000, category: "Textiles",    vendedora: "Tejidos del Sur",   badge: "Artesanal",  image: "https://tse1.mm.bing.net/th/id/OIP.KRXm_zfh1KdXz_c2uWYMggHaFj?rs=1&pid=ImgDetMain&o=7&rm=3", desc: "Hamaca tradicional paraguaya tejida a mano en telar. Resistente, colorida y duradera." },
-  { id: 7,  name: "Jarra Decorada a Mano",       price: 65000,  category: "Cerámica",    vendedora: "Cerámica Nativa",   badge: null,         image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&h=600&fit=crop",    desc: "Jarra de cerámica pintada a mano con motivos naturales y geométricos. Piezas únicas cocidas en horno artesanal." },
-  { id: 8,  name: "Dulce de Guayaba",            price: 22000,  category: "Alimentos",   vendedora: "Sabores de Itapúa", badge: "Oferta",     image: "https://recetacubana.com/wp-content/uploads/2018/11/mermelada-de-guayaba-casera.jpg",   desc: "Dulce de guayaba de frutas frescas de la zona. Sin conservantes, elaborado en pequeños lotes con receta tradicional." },
-  { id: 9,  name: "Utensilios de Madera Nativa", price: 55000,  category: "Madera",      vendedora: "Campo Verde",       badge: null,         image: "https://m.media-amazon.com/images/I/91OdxI-fJhL._AC_.jpg",                           desc: "Set de utensilios de cocina tallados en madera nativa. Tratados con aceite natural, libres de barnices tóxicos." },
-  { id: 10, name: "Canasto Tejido Artesanal",    price: 72000,  category: "Artesanías",  vendedora: "Tejidos del Sur",   badge: null,         image: "https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?w=600&h=600&fit=crop",    desc: "Canasto tejido con fibras naturales usando técnicas transmitidas por generaciones. Cada pieza es completamente única." },
+  { id: 1,  name: "Jabón Artesanal Natural",     price: 28000,  category: "Cosmética",  vendedora: "Almaluna",         badge: "Destacado", image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=600&h=600&fit=crop",    desc: "Jabones artesanales con ingredientes naturales de la región, sin sulfatos ni parabenos. Cada pieza hecha a mano por Marlene Kleiner." },
+  { id: 2,  name: "Remera Estampada Guaraní",    price: 85000,  category: "Ropa",       vendedora: "Gloria Estampados", badge: "Nuevo",     image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=600&fit=crop",    desc: "Remeras de algodón con diseños originales inspirados en la cultura guaraní. Estampado artesanal hecho a mano por Gloria." },
+  { id: 3,  name: "Pintura Paisaje Paraguayo",   price: 320000, category: "Arte",       vendedora: "Arte Paraguayo",    badge: null,        image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&h=600&fit=crop",    desc: "Pinturas al óleo sobre tela, representando paisajes del departamento de Itapúa. Piezas únicas firmadas por la artista." },
+  { id: 4,  name: "Miel de Abeja Pura",          price: 45000,  category: "Alimentos",  vendedora: "Campo Verde",       badge: null,        image: "https://publish.purewow.net/wp-content/uploads/sites/2/2022/11/Egg-wash-substitute-Honey-or-Maple-Syrup.jpg?fit=750%2C441", desc: "Miel pura de colmenas propias, sin aditivos ni conservantes. Cosechada en los campos de Hohenau." },
+  { id: 5,  name: "Queso Paraguay Fresco",       price: 38000,  category: "Alimentos",  vendedora: "Lácteos Hohenau",   badge: null,        image: "https://images.unsplash.com/photo-1552767059-ce182ead6c1b?w=600&h=600&fit=crop",    desc: "Queso fresco elaborado con leche de vaca de pastoreo libre. Receta tradicional de la colonia alemana de Hohenau." },
+  { id: 6,  name: "Hamaca Paraguaya Tejida",     price: 180000, category: "Textiles",   vendedora: "Tejidos del Sur",   badge: "Artesanal", image: "https://tse1.mm.bing.net/th/id/OIP.KRXm_zfh1KdXz_c2uWYMggHaFj?rs=1&pid=ImgDetMain&o=7&rm=3", desc: "Hamaca tradicional paraguaya tejida a mano en telar. Resistente, colorida y duradera." },
+  { id: 7,  name: "Jarra Decorada a Mano",       price: 65000,  category: "Cerámica",   vendedora: "Cerámica Nativa",   badge: null,        image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&h=600&fit=crop",    desc: "Jarra de cerámica pintada a mano con motivos naturales y geométricos. Piezas únicas cocidas en horno artesanal." },
+  { id: 8,  name: "Dulce de Guayaba",            price: 22000,  category: "Alimentos",  vendedora: "Sabores de Itapúa", badge: "Oferta",    image: "https://recetacubana.com/wp-content/uploads/2018/11/mermelada-de-guayaba-casera.jpg",   desc: "Dulce de guayaba de frutas frescas de la zona. Sin conservantes, elaborado en pequeños lotes con receta tradicional." },
+  { id: 9,  name: "Utensilios de Madera Nativa", price: 55000,  category: "Madera",     vendedora: "Campo Verde",       badge: null,        image: "https://m.media-amazon.com/images/I/91OdxI-fJhL._AC_.jpg",                           desc: "Set de utensilios de cocina tallados en madera nativa. Tratados con aceite natural, libres de barnices tóxicos." },
+  { id: 10, name: "Canasto Tejido Artesanal",    price: 72000,  category: "Artesanías", vendedora: "Tejidos del Sur",   badge: null,        image: "https://images.unsplash.com/photo-1606722590583-6951b5ea92ad?w=600&h=600&fit=crop",    desc: "Canasto tejido con fibras naturales usando técnicas transmitidas por generaciones. Cada pieza es completamente única." },
 ];
 
 const EMPRENDEDORES = [
@@ -88,37 +88,22 @@ export default function App() {
   const [added, setAdded]       = useState(null);
   const [selected, setSelected] = useState(null);
   const [slide, setSlide]       = useState(0);
-  const empGridRef              = useRef(null);
 
-  // Slideshow hero
+  // Slideshow hero — cambia cada 5 segundos
   useEffect(() => {
     const t = setInterval(() => setSlide(s => (s + 1) % HERO_SLIDES.length), 5000);
     return () => clearInterval(t);
   }, []);
 
-  // Bloquear scroll del body cuando hay modal o carrito abierto
+  // Bloquea scroll del body cuando hay modal o carrito abierto
   useEffect(() => {
     document.body.style.overflow = (cartOpen || selected) ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [cartOpen, selected]);
 
-  // Carrusel infinito de emprendedores — avanza solo como una ruleta
-  useEffect(() => {
-    const el = empGridRef.current;
-    if (!el) return;
-    const interval = setInterval(() => {
-      el.scrollLeft += 1;
-      // Cuando llegó a la mitad (items duplicados), resetea sin que se note
-      if (el.scrollLeft >= el.scrollWidth / 2) {
-        el.scrollLeft = 0;
-      }
-    }, 20);
-    return () => clearInterval(interval);
-  }, []);
-
-  const filtered   = category === "Todos" ? PRODUCTS : PRODUCTS.filter(p => p.category === category);
-  const cartCount  = cart.reduce((s, i) => s + i.qty, 0);
-  const cartTotal  = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const filtered  = category === "Todos" ? PRODUCTS : PRODUCTS.filter(p => p.category === category);
+  const cartCount = cart.reduce((s, i) => s + i.qty, 0);
+  const cartTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
   const addToCart = (product) => {
     setCart(prev => {
@@ -158,7 +143,8 @@ export default function App() {
         .nav-logo-main{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--green-dark);}
         .nav-logo-sub{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--warm);display:block;}
         .nav-links{display:flex;gap:36px;list-style:none;}
-        .nav-links a{text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--warm);transition:color .2s;}
+        .nav-links a{text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.07em;
+          text-transform:uppercase;color:var(--warm);transition:color .2s;}
         .nav-links a:hover{color:var(--green);}
         .cart-btn{position:relative;background:var(--green);color:white;border:none;padding:10px 22px;
           border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;
@@ -183,8 +169,8 @@ export default function App() {
           font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
         .btn-primary:hover{background:var(--green-dark);transform:translateY(-1px);}
         .btn-outline{background:transparent;color:var(--brown);border:1.5px solid rgba(44,36,22,.25);
-          padding:14px 28px;border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;
-          font-weight:600;cursor:pointer;transition:all .2s;}
+          padding:14px 28px;border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;
+          font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
         .btn-outline:hover{border-color:var(--green);color:var(--green);}
         .hero-stats{display:flex;gap:40px;margin-top:52px;padding-top:40px;border-top:1px solid rgba(45,122,45,0.15);}
         .stat-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--green);line-height:1;}
@@ -201,8 +187,8 @@ export default function App() {
           background:rgba(255,255,255,0.4);transition:all .3s;padding:0;}
         .dot.active{background:white;width:24px;border-radius:4px;}
         .hero-badge{position:absolute;bottom:52px;left:24px;z-index:10;background:rgba(255,255,255,0.95);
-          backdrop-filter:blur(8px);border-radius:12px;padding:12px 18px;display:flex;align-items:center;
-          gap:10px;box-shadow:0 8px 24px rgba(0,0,0,0.14);}
+          backdrop-filter:blur(8px);border-radius:12px;padding:12px 18px;display:flex;
+          align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,0.14);}
         .hero-badge-text{font-size:11px;font-weight:600;color:var(--brown);line-height:1.5;}
         .hero-badge-text span{color:var(--green);display:block;font-size:13px;}
 
@@ -220,8 +206,8 @@ export default function App() {
         .section-sub{color:var(--warm);font-size:15px;}
         .cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
         .cat-btn{background:transparent;border:1.5px solid rgba(45,122,45,0.2);color:var(--warm);
-          padding:8px 18px;border-radius:20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;
-          font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
+          padding:8px 18px;border-radius:20px;font-family:'Plus Jakarta Sans',sans-serif;
+          font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
         .cat-btn.active,.cat-btn:hover{background:var(--green);border-color:var(--green);color:white;}
 
         /* GRILLA DE PRODUCTOS */
@@ -239,15 +225,16 @@ export default function App() {
           text-transform:uppercase;border:1.5px solid rgba(255,255,255,0.7);padding:8px 18px;
           border-radius:20px;background:rgba(255,255,255,0.1);backdrop-filter:blur(4px);}
         .product-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:var(--brown);
-          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:10px;}
+          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+          padding:4px 10px;border-radius:10px;}
         .product-info{padding:16px 18px 18px;}
         .product-vendor{font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:600;}
         .product-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--brown);margin-bottom:12px;line-height:1.3;}
         .product-footer{display:flex;align-items:center;justify-content:space-between;}
         .product-price{font-size:14px;font-weight:700;color:var(--green-dark);}
         .add-btn{background:var(--green-light);color:var(--green-dark);border:none;padding:8px 16px;
-          border-radius:20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;
-          cursor:pointer;transition:all .2s;}
+          border-radius:20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;
+          font-weight:600;cursor:pointer;transition:all .2s;}
         .add-btn.ok{background:var(--green)!important;color:white!important;}
         .add-btn:hover{background:var(--green);color:white;}
 
@@ -263,7 +250,8 @@ export default function App() {
         .modal-img-wrap{position:relative;}
         .modal-img{width:100%;height:100%;object-fit:cover;display:block;}
         .modal-badge{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--brown);
-          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:10px;}
+          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+          padding:5px 12px;border-radius:10px;}
         .modal-body{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px;}
         .modal-vendor{font-size:12px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;}
         .modal-duena{font-size:12px;color:var(--warm);}
@@ -281,22 +269,56 @@ export default function App() {
         .modal-add-btn.ok{background:var(--green-mid)!important;}
         .modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.92);border:none;
           width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;
-          align-items:center;justify-content:center;color:var(--brown);z-index:10;box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+          align-items:center;justify-content:center;color:var(--brown);z-index:10;
+          box-shadow:0 2px 8px rgba(0,0,0,0.12);}
         .modal-close:hover{background:white;}
         .modal-wrapper{position:relative;}
 
-        /* EMPRENDEDORES */
+        /* ── EMPRENDEDORES — TICKER INFINITO CSS PURO ── */
         .emp-section{background:var(--green-dark);padding:80px 60px;}
         .emp-section .section-eyebrow{color:var(--gold);}
         .emp-section .section-title{color:var(--white);}
         .emp-section .section-sub{color:rgba(255,255,255,0.55);}
-        /* Carrusel infinito — overflow oculto en desktop, scroll en mobile */
-        .emp-grid{display:flex;overflow-x:auto;gap:14px;margin-top:40px;padding-bottom:8px;
-          -ms-overflow-style:none;scrollbar-width:none;}
-        .emp-grid::-webkit-scrollbar{display:none;}
-        .emp-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-          border-radius:14px;padding:22px 18px;text-align:center;transition:all .2s;
-          min-width:180px;flex-shrink:0;}
+
+        /* Contenedor: recorta el overflow para que el ticker desaparezca por los bordes */
+        .emp-ticker-wrap{
+          overflow: hidden;
+          margin-top: 40px;
+          /* Máscara de transparencia en los bordes — efecto fade */
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+
+        /* La animación: mueve la fila completa hacia la izquierda un 50% (mitad = lista original) */
+        @keyframes ticker {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        /* La fila de tarjetas — ancho total calculado por el contenido */
+        .emp-grid{
+          display: flex;
+          gap: 14px;
+          width: max-content;
+          animation: ticker 28s linear infinite;
+          padding-bottom: 8px;
+        }
+
+        /* Pausa la animación al pasar el mouse — detalle pro */
+        .emp-ticker-wrap:hover .emp-grid{
+          animation-play-state: paused;
+        }
+
+        .emp-card{
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 14px;
+          padding: 22px 18px;
+          text-align: center;
+          transition: all .2s;
+          width: 190px;
+          flex-shrink: 0;
+        }
         .emp-card:hover{background:rgba(255,255,255,0.11);transform:translateY(-2px);}
         .emp-avatar{width:52px;height:52px;border-radius:50%;background:var(--green-mid);
           display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
@@ -306,14 +328,16 @@ export default function App() {
         .emp-rubro{font-size:11px;color:rgba(255,255,255,0.55);margin-bottom:8px;}
         .emp-count{font-size:12px;color:var(--gold);font-weight:600;}
         .emp-cta{text-align:center;margin-top:36px;}
-        .btn-light{background:white;color:var(--green-dark);border:none;padding:14px 30px;border-radius:30px;
-          font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
+        .btn-light{background:white;color:var(--green-dark);border:none;padding:14px 30px;
+          border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;
+          font-weight:600;cursor:pointer;transition:all .2s;}
         .btn-light:hover{background:var(--green-light);}
 
         /* INFO */
         .info-section{padding:80px 60px;background:var(--cream-dark);}
         .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
-        .info-card{background:white;border-radius:16px;padding:28px 24px;border-bottom:3px solid var(--green-light);transition:border-color .2s;}
+        .info-card{background:white;border-radius:16px;padding:28px 24px;
+          border-bottom:3px solid var(--green-light);transition:border-color .2s;}
         .info-card:hover{border-color:var(--green);}
         .info-icon{font-size:28px;margin-bottom:14px;}
         .info-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--brown);margin-bottom:8px;}
@@ -324,7 +348,6 @@ export default function App() {
         .contacto-section .section-eyebrow{color:var(--gold);}
         .contacto-section .section-title{color:white;}
         .contacto-section .section-sub{color:rgba(255,255,255,0.5);}
-        /* 2 tarjetas en vez de 3 — Maps ya está en el mapa embebido */
         .contacto-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px;}
         .contacto-card{display:flex;flex-direction:column;align-items:center;text-align:center;
           padding:28px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
@@ -337,17 +360,20 @@ export default function App() {
           font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;
           text-decoration:none;transition:background .2s;display:inline-block;}
         .contacto-btn:hover{background:var(--green-mid);}
-        .mapa-wrap{margin-top:32px;border-radius:16px;overflow:hidden;height:320px;border:1px solid rgba(255,255,255,0.1);}
+        .mapa-wrap{margin-top:32px;border-radius:16px;overflow:hidden;height:320px;
+          border:1px solid rgba(255,255,255,0.1);}
         .mapa-wrap iframe{width:100%;height:100%;border:0;display:block;}
 
         /* CARRITO */
-        .overlay{position:fixed;inset:0;background:rgba(44,36,22,0.5);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;}
+        .overlay{position:fixed;inset:0;background:rgba(44,36,22,0.5);z-index:200;
+          opacity:0;pointer-events:none;transition:opacity .3s;}
         .overlay.open{opacity:1;pointer-events:all;}
         .cart-sidebar{position:fixed;right:0;top:0;height:100vh;width:380px;background:var(--white);
-          z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(0.4,0,0.2,1);
-          display:flex;flex-direction:column;}
+          z-index:201;transform:translateX(100%);
+          transition:transform .35s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;}
         .cart-sidebar.open{transform:translateX(0);}
-        .cart-header{padding:24px;border-bottom:1px solid var(--cream-dark);display:flex;align-items:center;justify-content:space-between;}
+        .cart-header{padding:24px;border-bottom:1px solid var(--cream-dark);
+          display:flex;align-items:center;justify-content:space-between;}
         .cart-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
         .cart-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--warm);}
         .cart-items{flex:1;overflow-y:auto;padding:20px 24px;}
@@ -371,13 +397,16 @@ export default function App() {
         .cart-total-label{font-size:13px;color:var(--warm);}
         .cart-total-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--green-dark);}
         .checkout-btn{width:100%;background:var(--green);color:white;border:none;padding:16px;
-          border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;}
+          border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;
+          font-weight:600;cursor:pointer;transition:background .2s;}
         .checkout-btn:hover{background:var(--green-dark);}
 
         /* FOOTER */
-        .footer{background:#1a1208;padding:36px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+        .footer{background:#1a1208;padding:36px 60px;display:flex;justify-content:space-between;
+          align-items:center;flex-wrap:wrap;gap:16px;}
         .footer-logo-text{font-family:'Playfair Display',serif;font-size:16px;color:white;font-weight:700;}
-        .footer-logo-sub{font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.1em;display:block;margin-top:2px;}
+        .footer-logo-sub{font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;
+          letter-spacing:.1em;display:block;margin-top:2px;}
         .footer-socials{display:flex;gap:12px;align-items:center;}
         .footer-social-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.08);
           display:flex;align-items:center;justify-content:center;text-decoration:none;
@@ -516,25 +545,30 @@ export default function App() {
         </div>
       </section>
 
-      {/* EMPRENDEDORES — carrusel infinito */}
+      {/* EMPRENDEDORES — ticker infinito */}
       <section className="emp-section" id="emprendedores">
         <div className="section-header">
           <p className="section-eyebrow">Quiénes somos</p>
           <h2 className="section-title">Nuestros Emprendedores</h2>
-          <p className="section-sub">Cada emprendimiento con su identidad, su historia y sus productos únicos</p>
+          <p className="section-sub">Pasá el mouse para pausar · Deslizá para explorar</p>
         </div>
-        {/* Lista duplicada para efecto infinito */}
-        <div className="emp-grid" ref={empGridRef}>
-          {[...EMPRENDEDORES, ...EMPRENDEDORES].map((e, idx) => (
-            <div key={`${e.name}-${idx}`} className="emp-card">
-              <div className="emp-avatar">{e.avatar}</div>
-              <div className="emp-name">{e.name}</div>
-              <div className="emp-duena">{e.duena}</div>
-              <div className="emp-rubro">{e.rubro}</div>
-              <div className="emp-count">{e.products} productos activos</div>
-            </div>
-          ))}
+
+        {/* emp-ticker-wrap recorta el overflow, emp-grid se mueve con CSS */}
+        <div className="emp-ticker-wrap">
+          <div className="emp-grid">
+            {/* Lista original + copia exacta = loop sin cortes */}
+            {[...EMPRENDEDORES, ...EMPRENDEDORES].map((e, idx) => (
+              <div key={`${e.name}-${idx}`} className="emp-card">
+                <div className="emp-avatar">{e.avatar}</div>
+                <div className="emp-name">{e.name}</div>
+                <div className="emp-duena">{e.duena}</div>
+                <div className="emp-rubro">{e.rubro}</div>
+                <div className="emp-count">{e.products} productos activos</div>
+              </div>
+            ))}
+          </div>
         </div>
+
         <div className="emp-cta">
           <p style={{color:"rgba(255,255,255,0.45)",fontSize:"13px",marginBottom:"16px"}}>
             50+ emprendimientos registrados · Abierto a nuevos emprendedores
@@ -575,7 +609,6 @@ export default function App() {
           <h2 className="section-title">¿Cómo llegar?</h2>
           <p className="section-sub">Sobre la Ruta PY 06, Hohenau, Itapúa · Abiertos los 7 días del año</p>
         </div>
-        {/* 2 tarjetas — Maps ya está en el mapa de abajo */}
         <div className="contacto-grid">
           <div className="contacto-card">
             <span className="contacto-icon">📞</span>
@@ -592,7 +625,6 @@ export default function App() {
             <a className="contacto-btn" href="https://hohenau.gov.py/" target="_blank" rel="noreferrer">Ver sitio oficial</a>
           </div>
         </div>
-        {/* MAPA embebido — abajo de las tarjetas */}
         <div className="mapa-wrap">
           <iframe
             title="Ubicación Estación de Carretera"
