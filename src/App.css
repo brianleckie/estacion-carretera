@@ -27,7 +27,7 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media(max-width:900px) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
@@ -39,4 +39,14 @@
 
 .read-the-docs {
   color: #888;
+}
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  /* Texto más pequeño para que entre bien */
+  .product-name { font-size: 14px; }
+  .product-price { font-size: 12px; }
+  .add-btn { padding: 6px 10px; font-size: 11px; }
 }
