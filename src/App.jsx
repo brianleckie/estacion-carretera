@@ -123,11 +123,22 @@ export default function App() {
   const [added, setAdded]       = useState(null);
   const [selected, setSelected] = useState(null);
   const [slide, setSlide]       = useState(0);
+  
+useEffect(() => {
+  const el = empGridRef.current;
+  if (!el) return;
 
-  useEffect(() => {
-    const t = setInterval(() => setSlide(s => (s + 1) % HERO_SLIDES.length), 5000);
-    return () => clearInterval(t);
-  }, []);
+  const interval = setInterval(() => {
+    el.scrollLeft += 1; // avanza 1px por tick — suave y continuo
+
+    // Cuando llegó a la mitad (items duplicados), resetea sin que se vea
+    if (el.scrollLeft >= el.scrollWidth / 2) {
+      el.scrollLeft = 0;
+    }
+  }, 20); // cada 20ms = 50fps, muy fluido
+
+  return () => clearInterval(interval);
+}, []);
 
   useEffect(() => {
     document.body.style.overflow = (cartOpen || selected) ? "hidden" : "";
@@ -580,17 +591,28 @@ export default function App() {
           <h2 className="section-title">Nuestros Emprendedores</h2>
           <p className="section-sub">Cada emprendimiento con su identidad, su historia y sus productos únicos</p>
         </div>
-        <div className="emp-grid">
-          {EMPRENDEDORES.map(e => (
-            <div key={e.name} className="emp-card">
-              <div className="emp-avatar">{e.avatar}</div>
-              <div className="emp-name">{e.name}</div>
-              <div className="emp-duena">{e.duena}</div>
-              <div className="emp-rubro">{e.rubro}</div>
-              <div className="emp-count">{e.products} productos activos</div>
-            </div>
-          ))}
-        </div>
+        <div className="emp-grid" ref={empGridRef}>
+  {/* Lista original */}
+  {EMPRENDEDORES.map(e => (
+    <div key={e.name} className="emp-card">
+      <div className="emp-avatar">{e.avatar}</div>
+      <div className="emp-name">{e.name}</div>
+      <div className="emp-duena">{e.duena}</div>
+      <div className="emp-rubro">{e.rubro}</div>
+      <div className="emp-count">{e.products} productos activos</div>
+    </div>
+  ))}
+  {/* Copia duplicada — crea el efecto infinito */}
+  {EMPRENDEDORES.map(e => (
+    <div key={`${e.name}-copy`} className="emp-card">
+      <div className="emp-avatar">{e.avatar}</div>
+      <div className="emp-name">{e.name}</div>
+      <div className="emp-duena">{e.duena}</div>
+      <div className="emp-rubro">{e.rubro}</div>
+      <div className="emp-count">{e.products} productos activos</div>
+    </div>
+  ))}
+</div>
         <div className="emp-cta">
           <p style={{color:"rgba(255,255,255,0.45)",fontSize:"13px",marginBottom:"16px"}}>
             50+ emprendimientos registrados · Abierto a nuevos emprendedores
