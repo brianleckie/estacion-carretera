@@ -1,16 +1,11 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
-@media(max-width:900px) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-
-  /* 2 columnas en mobile ← DENTRO del @media */
+@media (max-width: 900px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px !important;
