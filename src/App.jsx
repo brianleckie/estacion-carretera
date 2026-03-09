@@ -59,8 +59,8 @@ const FAMILIAS = [
 
 // Imágenes reales del hero — poné los archivos en /public/
 const HERO_SLIDES = [
-  { src: "/hohe-edificio.jpg",     alt: "Edificio Estación de Carretera Hohenau" },
-  { src: "/hohe-inauguracion.jpg", alt: "Inauguración con el Presidente Santiago Peña" },
+  { src: "/hohe-edificio.jpeg",     alt: "Edificio Estación de Carretera Hohenau" },
+  { src: "/hohe-inauguracion.jpeg", alt: "Inauguración con el Presidente Santiago Peña" },
 ];
 
 const formatPrice = (p) => `₲ ${p.toLocaleString("es-PY")}`;
