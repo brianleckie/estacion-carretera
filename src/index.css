@@ -1,16 +1,7 @@
+/* Reset global — limpia los estilos por defecto de Vite */
 #root {
   max-width: 100%;
   margin: 0;
   padding: 0;
   text-align: left;
-}
-
-@media (max-width: 900px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
-  }
-  .product-name  { font-size: 14px !important; }
-  .product-price { font-size: 12px !important; }
-  .add-btn       { padding: 6px 10px !important; font-size: 11px !important; }
 }
