@@ -747,17 +747,20 @@ export default function App() {
             </div>
           ))}
         </div>
-        {cart.length > 0 && (
-          <div className="cart-footer">
-            <div className="cart-total-row">
-              <span className="cart-total-label">Total estimado</span>
-              <span className="cart-total-val">{formatPrice(cartTotal)}</span>
-            </div>
-            <button className="checkout-btn" onClick={() => alert("¡Checkout en desarrollo! 🚀")}>
-              Proceder al pago →
-            </button>
-          </div>
-        )}
+{cart.length > 0 && (
+  <div className="cart-footer">
+    <div className="cart-total-row">
+      <span className="cart-total-label">Total estimado</span>
+      <span className="cart-total-val">{formatPrice(cartTotal)}</span>
+    </div>
+    <p style={{textAlign:"center",fontSize:"12px",color:"var(--warm)",marginBottom:"12px"}}>
+      💳 Pagos online próximamente · Contactanos por WhatsApp para coordinar
+    </p>
+    <button className="checkout-btn" onClick={() => setCartOpen(false)}>
+      Consultar por WhatsApp →
+    </button>
+  </div>
+)}
       </div>
     </>
   );
