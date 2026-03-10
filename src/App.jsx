@@ -756,9 +756,14 @@ export default function App() {
     <p style={{textAlign:"center",fontSize:"12px",color:"var(--warm)",marginBottom:"12px"}}>
       💳 Pagos online próximamente · Contactanos por WhatsApp para coordinar
     </p>
-    <button className="checkout-btn" onClick={() => setCartOpen(false)}>
-      Consultar por WhatsApp →
-    </button>
+<button className="checkout-btn" onClick={() => {
+  const msg = cart.map(i => `• ${i.name} x${i.qty} — ${formatPrice(i.price * i.qty)}`).join("\n");
+  const texto = `Hola Estación de Carretera! Me interesan estos productos:\n\n${msg}\n\nTotal: ${formatPrice(cartTotal)}`;
+  window.open(`https://wa.me/595${TEL_ESTACION.replace(/^0/,"")}?text=${encodeURIComponent(texto)}`, "_blank");
+  setCartOpen(false);
+}}>
+  Consultar por WhatsApp →
+</button>
   </div>
 )}
       </div>
