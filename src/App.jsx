@@ -54,6 +54,34 @@ const EMPRENDEDORES = [
   { name: "Sabores de Itapúa", duena: "Familia Müller",   rubro: "Dulces y mermeladas",     products: 6,  avatar: "SI" },
 ];
 
+// Novedades y eventos — reemplazar con datos reales cuando los tengan
+const NOVEDADES = [
+  {
+    id: 1,
+    titulo: "Feria de Artesanías de Otoño",
+    fecha: "Abril 2025",
+    desc: "Gran feria con los mejores productos de los emprendedores de la Estación. Música en vivo, gastronomía internacional y sorteos entre los presentes.",
+    emoji: "🎪",
+    badge: "Próximo evento",
+  },
+  {
+    id: 2,
+    titulo: "Nueva línea Almaluna — Yerba Mate",
+    fecha: "Marzo 2025",
+    desc: "Almaluna lanzó su nueva línea de jabones con extracto de yerba mate y karité, disponibles en el showroom a partir de esta semana.",
+    emoji: "🌿",
+    badge: "Novedad",
+  },
+  {
+    id: 3,
+    titulo: "Food Park: Menú Especial de Semana Santa",
+    fecha: "Abril 2025",
+    desc: "El Food Park de las Naciones preparó un menú especial para Semana Santa con platos típicos paraguayos, japoneses y alemanes de la región.",
+    emoji: "🍜",
+    badge: "Gastronomía",
+  },
+];
+
 const HERO_SLIDES = [
   { src: "/hohe-edificio.jpeg",     alt: "Edificio Estación de Carretera Hohenau" },
   { src: "/hohe-inauguracion.jpeg", alt: "Inauguración con el Presidente Santiago Peña" },
@@ -89,13 +117,11 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   const [slide, setSlide]       = useState(0);
 
-  // Slideshow hero — cambia cada 5 segundos
   useEffect(() => {
     const t = setInterval(() => setSlide(s => (s + 1) % HERO_SLIDES.length), 5000);
     return () => clearInterval(t);
   }, []);
 
-  // Bloquea scroll del body cuando hay modal o carrito abierto
   useEffect(() => {
     document.body.style.overflow = (cartOpen || selected) ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -142,7 +168,7 @@ export default function App() {
         .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
         .nav-logo-main{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--green-dark);}
         .nav-logo-sub{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--warm);display:block;}
-        .nav-links{display:flex;gap:36px;list-style:none;}
+        .nav-links{display:flex;gap:28px;list-style:none;}
         .nav-links a{text-decoration:none;font-size:12px;font-weight:600;letter-spacing:.07em;
           text-transform:uppercase;color:var(--warm);transition:color .2s;}
         .nav-links a:hover{color:var(--green);}
@@ -192,7 +218,7 @@ export default function App() {
         .hero-badge-text{font-size:11px;font-weight:600;color:var(--brown);line-height:1.5;}
         .hero-badge-text span{color:var(--green);display:block;font-size:13px;}
 
-        /* BANNER */
+        /* BANNER INSTITUCIONAL — incluye Intendente Enrique Hahn */
         .jica-banner{background:var(--green);color:white;padding:14px 48px;
           display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;}
         .jica-item{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;opacity:.95;}
@@ -210,7 +236,7 @@ export default function App() {
           font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
         .cat-btn.active,.cat-btn:hover{background:var(--green);border-color:var(--green);color:white;}
 
-        /* GRILLA DE PRODUCTOS */
+        /* GRILLA PRODUCTOS */
         .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px;}
         .product-card{background:var(--white);border-radius:16px;overflow:hidden;
           transition:transform .25s,box-shadow .25s;border:1px solid var(--cream-dark);cursor:pointer;}
@@ -225,16 +251,14 @@ export default function App() {
           text-transform:uppercase;border:1.5px solid rgba(255,255,255,0.7);padding:8px 18px;
           border-radius:20px;background:rgba(255,255,255,0.1);backdrop-filter:blur(4px);}
         .product-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:var(--brown);
-          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-          padding:4px 10px;border-radius:10px;}
+          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:10px;}
         .product-info{padding:16px 18px 18px;}
         .product-vendor{font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;font-weight:600;}
         .product-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--brown);margin-bottom:12px;line-height:1.3;}
         .product-footer{display:flex;align-items:center;justify-content:space-between;}
         .product-price{font-size:14px;font-weight:700;color:var(--green-dark);}
         .add-btn{background:var(--green-light);color:var(--green-dark);border:none;padding:8px 16px;
-          border-radius:20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;
-          font-weight:600;cursor:pointer;transition:all .2s;}
+          border-radius:20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;}
         .add-btn.ok{background:var(--green)!important;color:white!important;}
         .add-btn:hover{background:var(--green);color:white;}
 
@@ -250,8 +274,7 @@ export default function App() {
         .modal-img-wrap{position:relative;}
         .modal-img{width:100%;height:100%;object-fit:cover;display:block;}
         .modal-badge{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--brown);
-          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-          padding:5px 12px;border-radius:10px;}
+          font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:10px;}
         .modal-body{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px;}
         .modal-vendor{font-size:12px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;}
         .modal-duena{font-size:12px;color:var(--warm);}
@@ -269,75 +292,60 @@ export default function App() {
         .modal-add-btn.ok{background:var(--green-mid)!important;}
         .modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.92);border:none;
           width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;
-          align-items:center;justify-content:center;color:var(--brown);z-index:10;
-          box-shadow:0 2px 8px rgba(0,0,0,0.12);}
+          align-items:center;justify-content:center;color:var(--brown);z-index:10;box-shadow:0 2px 8px rgba(0,0,0,0.12);}
         .modal-close:hover{background:white;}
         .modal-wrapper{position:relative;}
 
-        /* ── EMPRENDEDORES — TICKER INFINITO CSS PURO ── */
+        /* EMPRENDEDORES — TICKER INFINITO CSS */
         .emp-section{background:var(--green-dark);padding:80px 60px;}
         .emp-section .section-eyebrow{color:var(--gold);}
         .emp-section .section-title{color:var(--white);}
         .emp-section .section-sub{color:rgba(255,255,255,0.55);}
-
-        /* Contenedor: recorta el overflow para que el ticker desaparezca por los bordes */
         .emp-ticker-wrap{
-          overflow: hidden;
-          margin-top: 40px;
-          /* Máscara de transparencia en los bordes — efecto fade */
-          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          overflow:hidden;margin-top:40px;
+          -webkit-mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
+          mask-image:linear-gradient(to right,transparent 0%,black 8%,black 92%,transparent 100%);
         }
-
-        /* La animación: mueve la fila completa hacia la izquierda un 50% (mitad = lista original) */
-        @keyframes ticker {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        @keyframes ticker{
+          0%{transform:translateX(0);}
+          100%{transform:translateX(-50%);}
         }
-
-        /* La fila de tarjetas — ancho total calculado por el contenido */
-        .emp-grid{
-          display: flex;
-          gap: 14px;
-          width: max-content;
-          animation: ticker 28s linear infinite;
-          padding-bottom: 8px;
-        }
-
-        /* Pausa la animación al pasar el mouse — detalle pro */
-        .emp-ticker-wrap:hover .emp-grid{
-          animation-play-state: paused;
-        }
-
-        .emp-card{
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 14px;
-          padding: 22px 18px;
-          text-align: center;
-          transition: all .2s;
-          width: 190px;
-          flex-shrink: 0;
-        }
+        .emp-grid{display:flex;gap:14px;width:max-content;animation:ticker 28s linear infinite;padding-bottom:8px;}
+        .emp-ticker-wrap:hover .emp-grid{animation-play-state:paused;}
+        .emp-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+          border-radius:14px;padding:22px 18px;text-align:center;transition:all .2s;width:190px;flex-shrink:0;}
         .emp-card:hover{background:rgba(255,255,255,0.11);transform:translateY(-2px);}
         .emp-avatar{width:52px;height:52px;border-radius:50%;background:var(--green-mid);
           display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
-          color:white;margin:0 auto 14px;letter-spacing:.04em;}
+          color:white;margin:0 auto 14px;}
         .emp-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:white;margin-bottom:3px;}
         .emp-duena{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px;}
         .emp-rubro{font-size:11px;color:rgba(255,255,255,0.55);margin-bottom:8px;}
         .emp-count{font-size:12px;color:var(--gold);font-weight:600;}
         .emp-cta{text-align:center;margin-top:36px;}
         .btn-light{background:white;color:var(--green-dark);border:none;padding:14px 30px;
-          border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;
-          font-weight:600;cursor:pointer;transition:all .2s;}
+          border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
         .btn-light:hover{background:var(--green-light);}
+
+        /* NOVEDADES */
+        .novedades-section{padding:80px 60px;background:var(--white);}
+        .novedades-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:0;}
+        .novedad-card{background:var(--cream);border-radius:16px;padding:28px 24px;
+          border:1px solid var(--cream-dark);transition:all .25s;
+          display:flex;flex-direction:column;gap:10px;}
+        .novedad-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(45,122,45,0.1);border-color:rgba(45,122,45,0.2);}
+        .novedad-emoji{font-size:36px;}
+        .novedad-badge{display:inline-block;background:var(--green-light);color:var(--green-dark);
+          font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+          padding:4px 12px;border-radius:20px;width:fit-content;}
+        .novedad-fecha{font-size:11px;color:var(--warm);font-weight:500;}
+        .novedad-titulo{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--brown);line-height:1.3;}
+        .novedad-desc{font-size:13px;color:var(--warm);line-height:1.75;flex:1;}
 
         /* INFO */
         .info-section{padding:80px 60px;background:var(--cream-dark);}
         .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
-        .info-card{background:white;border-radius:16px;padding:28px 24px;
-          border-bottom:3px solid var(--green-light);transition:border-color .2s;}
+        .info-card{background:white;border-radius:16px;padding:28px 24px;border-bottom:3px solid var(--green-light);transition:border-color .2s;}
         .info-card:hover{border-color:var(--green);}
         .info-icon{font-size:28px;margin-bottom:14px;}
         .info-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--brown);margin-bottom:8px;}
@@ -360,20 +368,16 @@ export default function App() {
           font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;
           text-decoration:none;transition:background .2s;display:inline-block;}
         .contacto-btn:hover{background:var(--green-mid);}
-        .mapa-wrap{margin-top:32px;border-radius:16px;overflow:hidden;height:320px;
-          border:1px solid rgba(255,255,255,0.1);}
+        .mapa-wrap{margin-top:32px;border-radius:16px;overflow:hidden;height:320px;border:1px solid rgba(255,255,255,0.1);}
         .mapa-wrap iframe{width:100%;height:100%;border:0;display:block;}
 
         /* CARRITO */
-        .overlay{position:fixed;inset:0;background:rgba(44,36,22,0.5);z-index:200;
-          opacity:0;pointer-events:none;transition:opacity .3s;}
+        .overlay{position:fixed;inset:0;background:rgba(44,36,22,0.5);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;}
         .overlay.open{opacity:1;pointer-events:all;}
         .cart-sidebar{position:fixed;right:0;top:0;height:100vh;width:380px;background:var(--white);
-          z-index:201;transform:translateX(100%);
-          transition:transform .35s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;}
+          z-index:201;transform:translateX(100%);transition:transform .35s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;}
         .cart-sidebar.open{transform:translateX(0);}
-        .cart-header{padding:24px;border-bottom:1px solid var(--cream-dark);
-          display:flex;align-items:center;justify-content:space-between;}
+        .cart-header{padding:24px;border-bottom:1px solid var(--cream-dark);display:flex;align-items:center;justify-content:space-between;}
         .cart-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
         .cart-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--warm);}
         .cart-items{flex:1;overflow-y:auto;padding:20px 24px;}
@@ -397,16 +401,13 @@ export default function App() {
         .cart-total-label{font-size:13px;color:var(--warm);}
         .cart-total-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--green-dark);}
         .checkout-btn{width:100%;background:var(--green);color:white;border:none;padding:16px;
-          border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;
-          font-weight:600;cursor:pointer;transition:background .2s;}
+          border-radius:30px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;}
         .checkout-btn:hover{background:var(--green-dark);}
 
         /* FOOTER */
-        .footer{background:#1a1208;padding:36px 60px;display:flex;justify-content:space-between;
-          align-items:center;flex-wrap:wrap;gap:16px;}
+        .footer{background:#1a1208;padding:36px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
         .footer-logo-text{font-family:'Playfair Display',serif;font-size:16px;color:white;font-weight:700;}
-        .footer-logo-sub{font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;
-          letter-spacing:.1em;display:block;margin-top:2px;}
+        .footer-logo-sub{font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.1em;display:block;margin-top:2px;}
         .footer-socials{display:flex;gap:12px;align-items:center;}
         .footer-social-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.08);
           display:flex;align-items:center;justify-content:center;text-decoration:none;
@@ -421,15 +422,14 @@ export default function App() {
         @media(max-width:900px){
           .hero{grid-template-columns:1fr;}
           .hero-right{height:300px;}
-          .hero-left,.section{padding:48px 24px;}
+          .hero-left,.section,.novedades-section{padding:48px 24px;}
           .nav{padding:0 20px;}
           .nav-links{display:none;}
-          .info-grid{grid-template-columns:1fr;}
-          .contacto-grid{grid-template-columns:1fr;}
+          .info-grid,.contacto-grid,.novedades-grid{grid-template-columns:1fr;}
           .cart-sidebar{width:100%;}
           .emp-section,.info-section,.contacto-section{padding:60px 24px;}
           .footer{flex-direction:column;padding:28px 24px;text-align:center;}
-          .jica-banner{padding:12px 20px;gap:12px;}
+          .jica-banner{padding:12px 20px;gap:10px;flex-direction:column;align-items:flex-start;}
           .modal{grid-template-columns:1fr;}
           .modal-img-wrap{aspect-ratio:16/9;}
           .modal-body{padding:24px;}
@@ -452,7 +452,13 @@ export default function App() {
           </div>
         </div>
         <ul className="nav-links">
-          {[["Showroom","#showroom"],["Emprendedores","#emprendedores"],["La Estación","#info"],["Contacto","#contacto"]].map(([l,h]) => (
+          {[
+            ["Showroom","#showroom"],
+            ["Emprendedores","#emprendedores"],
+            ["Novedades","#novedades"],
+            ["La Estación","#info"],
+            ["Contacto","#contacto"],
+          ].map(([l,h]) => (
             <li key={l}><a href={h}>{l}</a></li>
           ))}
         </ul>
@@ -500,11 +506,12 @@ export default function App() {
         </div>
       </section>
 
-      {/* BANNER */}
+      {/* BANNER INSTITUCIONAL — con Intendente Enrique Hahn */}
       <div className="jica-banner">
         <div className="jica-item"><span className="jica-dot"/>Respaldado por EBY</div>
         <div className="jica-item"><span className="jica-dot"/>Cooperación JICA — Japón</div>
         <div className="jica-item"><span className="jica-dot"/>Ruta Turística de Itapúa · SENATUR</div>
+        <div className="jica-item"><span className="jica-dot"/>Iniciativa del Intendente Enrique Hahn · Municipalidad de Hohenau</div>
       </div>
 
       {/* SHOWROOM */}
@@ -552,11 +559,8 @@ export default function App() {
           <h2 className="section-title">Nuestros Emprendedores</h2>
           <p className="section-sub">Pasá el mouse para pausar · Deslizá para explorar</p>
         </div>
-
-        {/* emp-ticker-wrap recorta el overflow, emp-grid se mueve con CSS */}
         <div className="emp-ticker-wrap">
           <div className="emp-grid">
-            {/* Lista original + copia exacta = loop sin cortes */}
             {[...EMPRENDEDORES, ...EMPRENDEDORES].map((e, idx) => (
               <div key={`${e.name}-${idx}`} className="emp-card">
                 <div className="emp-avatar">{e.avatar}</div>
@@ -568,7 +572,6 @@ export default function App() {
             ))}
           </div>
         </div>
-
         <div className="emp-cta">
           <p style={{color:"rgba(255,255,255,0.45)",fontSize:"13px",marginBottom:"16px"}}>
             50+ emprendimientos registrados · Abierto a nuevos emprendedores
@@ -577,6 +580,26 @@ export default function App() {
             onClick={() => window.open(`https://wa.me/595${TEL_ESTACION.replace(/^0/,"")}?text=Hola!%20Me%20gustar%C3%ADa%20registrar%20mi%20emprendimiento%20en%20Estaci%C3%B3n%20de%20Carretera.`, "_blank")}>
             Quiero unirme →
           </button>
+        </div>
+      </section>
+
+      {/* NOVEDADES Y EVENTOS */}
+      <section className="novedades-section" id="novedades">
+        <div className="section-header">
+          <p className="section-eyebrow">Novedades y Eventos</p>
+          <h2 className="section-title">Lo que está pasando</h2>
+          <p className="section-sub">Eventos, lanzamientos y noticias de la Estación de Carretera</p>
+        </div>
+        <div className="novedades-grid">
+          {NOVEDADES.map(n => (
+            <div key={n.id} className="novedad-card">
+              <div className="novedad-emoji">{n.emoji}</div>
+              <span className="novedad-badge">{n.badge}</span>
+              <div className="novedad-fecha">{n.fecha}</div>
+              <h3 className="novedad-titulo">{n.titulo}</h3>
+              <p className="novedad-desc">{n.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
